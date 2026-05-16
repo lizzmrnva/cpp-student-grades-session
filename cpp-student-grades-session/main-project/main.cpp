@@ -9,6 +9,7 @@ int main() {
     SetConsoleOutputCP(1251);
     cout << "Программа обработки итогов сессии" << endl;
     cout << "Вариант 8: Итоги сессии" << endl;
+    cout << "Моя любимая группа (Ветка MAIN)" << endl;
     cout << "Автор: Миронова Елизавета" << endl;
     StudentRecord students[MAX_STUDENTS];
     StudentRecord filtered[MAX_STUDENTS];
