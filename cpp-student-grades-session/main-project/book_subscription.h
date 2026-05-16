@@ -4,8 +4,6 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace std;
-
 struct StudentRecord {
     char surname[MAX_NAME_LENGTH];
     char name[MAX_NAME_LENGTH];
@@ -15,7 +13,9 @@ struct StudentRecord {
     char discipline[MAX_DISCIPLINE_LENGTH];
 };
 
-void printRecord(const StudentRecord* record) {
+inline void printRecord(const StudentRecord* record) {
+    using namespace std; 
+
     cout << left
         << setw(15) << record->surname
         << setw(15) << record->name
@@ -25,7 +25,9 @@ void printRecord(const StudentRecord* record) {
         << record->discipline << endl;
 }
 
-void printHeader() {
+inline void printHeader() {
+    using namespace std; 
+
     cout << left
         << setw(15) << "Фамилия"
         << setw(15) << "Имя"

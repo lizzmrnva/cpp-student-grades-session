@@ -1,9 +1,12 @@
 ﻿#include <iostream>
+#include <windows.h>
 #include "file_reader.h"
 #include "filter.h"
 #include "sort.h"
 using namespace std;
 int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
     cout << "Программа обработки итогов сессии" << endl;
     cout << "Вариант 8: Итоги сессии" << endl;
     cout << "Автор: Миронова Елизавета" << endl;
