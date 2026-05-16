@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "file_reader.h"
 #include "filter.h"
+#include "sort.h"
 using namespace std;
 int main() {
     cout << "Программа обработки итогов сессии" << endl;
@@ -13,18 +14,19 @@ int main() {
         cout << "Ошибка: не удалось загрузить данные!" << endl;
         return 1;
     }
-    cout << " Загружено студентов: " << count << endl;
+    cout << "Загружено студентов: " << count << endl;
     int choice = -1;
     while (choice != 0) {
         cout << "\nМЕНЮ" << endl;
         cout << "1. Показать всех студентов" << endl;
         cout << "2. Фильтр: категория 'История Беларуси'" << endl;
         cout << "3. Фильтр: оценка выше 7" << endl;
+        cout << "4. Сортировка" << endl;
         cout << "0. Выход" << endl;
         cout << "Выбор: ";
         cin >> choice;
         if (choice == 1) {
-            cout << "\n=== ВСЕ СТУДЕНТЫ ===" << endl;
+            cout << "\nВСЕ СТУДЕНТЫ" << endl;
             printHeader();
             for (int i = 0; i < count; i++) {
                 printRecord(&students[i]);
@@ -32,7 +34,7 @@ int main() {
         }
         else if (choice == 2) {
             int n = filterByDiscipline(students, count, filtered, "История Беларуси");
-            cout << "\n=== СТУДЕНТЫ: ИСТОРИЯ БЕЛАРУСИ ===" << endl;
+            cout << "\nСТУДЕНТЫ: ИСТОРИЯ БЕЛАРУСИ" << endl;
             cout << "Найдено: " << n << endl;
             printHeader();
             for (int i = 0; i < n; i++) {
@@ -41,11 +43,45 @@ int main() {
         }
         else if (choice == 3) {
             int n = filterByMinGrade(students, count, filtered, 7);
-            cout << "\n=== СТУДЕНТЫ С ОЦЕНКОЙ > 7 ===" << endl;
+            cout << "\nСТУДЕНТЫ С ОЦЕНКОЙ > 7" << endl;
             cout << "Найдено: " << n << endl;
             printHeader();
             for (int i = 0; i < n; i++) {
                 printRecord(&filtered[i]);
+            }
+        }
+        else if (choice == 4) {
+            StudentRecord* array[MAX_STUDENTS];
+            for (int i = 0; i < count; i++) {
+                array[i] = &students[i];
+            }
+            SortFunction sortMethods[] = { insertionSort, mergeSort };
+            cout << "\nВыбор метода сортировки:" << endl;
+            cout << "1. Insertion sort (вставками)" << endl;
+            cout << "2. Merge sort (слиянием)" << endl;
+            cout << "Выбор: ";
+            int sortChoice;
+            cin >> sortChoice;
+            if (sortChoice < 1 || sortChoice > 2) {
+                cout << "Неверный выбор." << endl;
+                continue;
+            }
+            CompareFunction compareCriteria[] = { compareBySurname, compareByDisciplineAndGrade };
+            cout << "Выбор критерия сортировки:" << endl;
+            cout << "1. По возрастанию фамилии" << endl;
+            cout << "2. По дисциплине (возр.) и оценке (убыв.)" << endl;
+            cout << "Выбор: ";
+            int compareChoice;
+            cin >> compareChoice;
+            if (compareChoice < 1 || compareChoice > 2) {
+                cout << "Неверный выбор." << endl;
+                continue;
+            }
+            sortMethods[sortChoice - 1](array, count, compareCriteria[compareChoice - 1]);
+            cout << "\nРЕЗУЛЬТАТЫ СОРТИРОВКИ" << endl;
+            printHeader();
+            for (int i = 0; i < count; i++) {
+                printRecord(array[i]);
             }
         }
     }
