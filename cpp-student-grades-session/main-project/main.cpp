@@ -9,9 +9,8 @@ int main() {
     SetConsoleOutputCP(1251);
     cout << "Программа обработки итогов сессии" << endl;
     cout << "Вариант 8: Итоги сессии" << endl;
-    cout << "Моя любимая группа (Ветка MAIN)" << endl;
     cout << "Автор: Миронова Елизавета" << endl;
-    cout << "Группа: 12345" << endl;
+    cout << "Группа: 123456789" << endl;
     StudentRecord students[MAX_STUDENTS];
     StudentRecord filtered[MAX_STUDENTS];
     int count = readStudentsFromFile("data.txt", students);
