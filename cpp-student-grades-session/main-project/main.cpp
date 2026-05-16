@@ -1,9 +1,20 @@
-#include <iostream>
+ï»¿#include <iostream>
+#include "file_reader.h"
 using namespace std;
 int main() {
-    cout << "Ïðîãðàììà îáðàáîòêè èòîãîâ ñåññèè" << endl;
-    cout << "Âàðèàíò 8: Èòîãè ñåññèè" << endl;
-    cout << "Àâòîð: Ìèðîíîâà Åëèçàâåòà" << endl;
-
+    cout << "ÐŸÑ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ Ð¸Ñ‚Ð¾Ð³Ð¾Ð² ÑÐµÑÑÐ¸Ð¸" << endl;
+    cout << "Ð’Ð°Ñ€Ð¸Ð°Ð½Ñ‚ 8: Ð˜Ñ‚Ð¾Ð³Ð¸ ÑÐµÑÑÐ¸Ð¸" << endl;
+    cout << "ÐÐ²Ñ‚Ð¾Ñ€: ÐœÐ¸Ñ€Ð¾Ð½Ð¾Ð²Ð° Ð•Ð»Ð¸Ð·Ð°Ð²ÐµÑ‚Ð°" << endl;
+    StudentRecord students[MAX_STUDENTS];
+    int count = readStudentsFromFile("data.txt", students);
+    if (count == 0) {
+        cout << "ÐžÑˆÐ¸Ð±ÐºÐ°: Ð½Ðµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð·Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ Ð´Ð°Ð½Ð½Ñ‹Ðµ!" << endl;
+        return 1;
+    }
+    cout << "âœ“ Ð—Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð¾ ÑÑ‚ÑƒÐ´ÐµÐ½Ñ‚Ð¾Ð²: " << count << endl << endl;
+    printHeader();
+    for (int i = 0; i < count; i++) {
+        printRecord(&students[i]);
+    }
     return 0;
 }
